@@ -60,11 +60,15 @@ def catalog_display(obj, request):
     )
 
 
-def get_ui_catalog_items(catalog_item):
-    ui_catalog_items = {
+def get_empty_ui_catalog_items():
+    return {
         'groups': [],
         'layers': []
     }
+
+
+def get_ui_catalog_items(catalog_item):
+    ui_catalog_items = get_empty_ui_catalog_items()
 
     if not catalog_item or not catalog_item.children:
         return ui_catalog_items
@@ -126,14 +130,22 @@ def layer_display(catalog, request):
     )
 
 
+def get_ui_catalog_items_by_group(group_catalog_item):
+    ui_catalog_items = get_empty_ui_catalog_items()
+    layers_by_group = CatalogItem.query().filter(CatalogItem.parent_id == group_catalog_item.id).all()
+    ui_catalog_items['layers'] = map(make_layer_info, layers_by_group)
+    return ui_catalog_items
+
+
 def group_display(obj, request):
     group_id = request.matchdict['group_id']
     group_catalog_item = CatalogItem.query().filter(CatalogItem.id == group_id).one()
+    ui_catalog_items = get_ui_catalog_items_by_group(group_catalog_item)
 
     return dict(
         title=obj.display_name,
         catalog=obj,
         group_catalog_item=group_catalog_item,
         custom_layout=True,
-        ui_catalog_items=get_ui_catalog_items(group_catalog_item)
+        ui_catalog_items=ui_catalog_items
     )
