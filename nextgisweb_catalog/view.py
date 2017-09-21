@@ -75,15 +75,30 @@ def get_ui_catalog_items(catalog_item):
         if ch.item_type == 'group':
             group_info = get_group_info(ch)
             ui_catalog_items['groups'].append(group_info)
-        elif ch.item_type == 'layer':
-            ui_catalog_items['layers'].append({
-                'id': ch.id,
-                'title': ch.display_name,
-                'description': ch.description,
-                'layer_resource_id': ch.layer_resource_id
-            })
+
+    last_layers = get_last_layers()
+    ui_catalog_items['layers'] = map(make_layer_info, last_layers)
 
     return ui_catalog_items
+
+
+def make_layer_info(layer_catalog_item):
+    return {
+        'id': layer_catalog_item.id,
+        'title': layer_catalog_item.display_name,
+        'description': layer_catalog_item.description,
+        'layer_resource_id': layer_catalog_item.layer_resource_id
+    }
+
+
+def get_last_layers():
+    last_layers = CatalogItem.query()\
+        .filter(CatalogItem.item_type == 'layer')\
+        .order_by(CatalogItem.id.desc())\
+        .limit(5)\
+        .all()
+
+    return last_layers
 
 
 def get_group_info(group_catalog_item):
