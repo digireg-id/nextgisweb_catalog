@@ -118,7 +118,8 @@ define([
                             "layer_enabled": true,
                             "layer_wms_id": null,
                             "layer_wfs_id": null,
-                            "layer_webmap_id": null
+                            "layer_webmap_id": null,
+                            "layer_resource_id": itm.id
                         }, {
                             parent: widget.getAddParent(),
                             attribute: "children"
@@ -238,6 +239,7 @@ define([
                     layer_wms_id: store.getValue(itm, "layer_wms_id"),
                     layer_wfs_id: store.getValue(itm, "layer_wfs_id"),
                     layer_webmap_id: store.getValue(itm, "layer_webmap_id"),
+                    layer_resource_id: store.getValue(itm, "layer_resource_id"),
                     children: array.map(store.getValues(itm, "children"), function (i) { return traverse(i); })
                 };
             }

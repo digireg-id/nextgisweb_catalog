@@ -1,0 +1,145 @@
+body {
+    font-family: "PT Sans", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.529;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: #fff;
+}
+
+#title {
+    background-color: #066ebe;
+}
+
+#title {
+    padding: 40px;
+}
+
+#title h1 {
+    font-size: 38px;
+    font-family: "Lato", "PT Sans", Helvetica, Arial, sans-serif;
+    color: white;
+}
+
+#title span.catalog-description {
+    color: #a5bfe0;
+    font-family: "Lato", "PT Sans", Helvetica, Arial, sans-serif;
+}
+
+#catalogGroups {
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#catalogGroups div.group-card {
+    width: 230px;
+    height: 120px;
+    display: inline-block;
+    text-align: left;
+    margin: 3px 5px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 6px 6px 6px 6px;
+    -moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    border: 1px solid #f0f2f4;
+}
+
+#catalogGroups div.group-title {
+    font-weight: bold;
+    line-height: 1em;
+    margin-bottom: 2px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 230px;
+    height: 20px;
+}
+
+#catalogGroups div.group-description {
+    line-height: 1em;
+    font-size: 13px;
+    overflow: hidden;
+    max-width: 230px;
+    height: 70px;
+}
+
+#catalogGroups div.count_info {
+    margin-top: 8px;
+}
+
+#catalogGroups div.count,
+#catalogGroups div.types {
+    display: inline-block;
+    width: 49%;
+}
+
+#catalogGroups div.count {
+    text-align: left;
+    color: #3687c8;
+    font-size: 20px;
+}
+
+#catalogGroups div.types {
+    text-align: right;
+    vertical-align: middle;
+}
+
+div.content-wrapper.layers-rows {
+    background-color: #DEEAF4;
+}
+
+#catalogLayers {
+    width: 100%;
+    margin: 20px 0;
+}
+
+#catalogLayers div.layer-row {
+    background-color: white;
+    position: relative;
+    margin: 10px 5px;
+    padding: 5px;
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    border: 1px solid #f0f2f4;
+}
+
+#catalogLayers div.layer-row-type {
+    position: absolute;
+    left: 6px;
+    top: 7px;
+}
+
+#catalogLayers div.layer-detail {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 35px;
+    margin-right: 50px;
+}
+
+#catalogLayers div.layer-actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#catalogLayers span.layer-title {
+    font-size: 15px;
+}
+
+#catalogLayers span.layer-description {
+    font-size: 13px;
+}
+
+#layerContainer #title {
+    padding: 22px;
+}
+
+#layerContainer #title h1 {
+    font-size: 21px;
+}
+
+
+

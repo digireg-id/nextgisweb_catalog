@@ -52,6 +52,7 @@ class CatalogItem(Base):
     layer_wms_id = db.Column(db.ForeignKey(Resource.id))
     layer_wfs_id = db.Column(db.ForeignKey(Resource.id))
     layer_webmap_id = db.Column(db.ForeignKey(Resource.id))
+    layer_resource_id = db.Column(db.ForeignKey(Resource.id), nullable=True)
 
     parent = db.relationship(
         'CatalogItem', remote_side=id, backref=db.backref(
@@ -85,7 +86,8 @@ class CatalogItem(Base):
                 layer_enabled=self.layer_enabled,
                 layer_webmap_id=self.layer_webmap_id,
                 layer_wms_id=self.layer_wms_id,
-                layer_wfs_id=self.layer_wfs_id
+                layer_wfs_id=self.layer_wfs_id,
+                layer_resource_id=self.layer_resource_id
             )
 
     def from_dict(self, data):
@@ -102,7 +104,8 @@ class CatalogItem(Base):
                   'layer_enabled',
                   'layer_webmap_id',
                   'layer_wms_id',
-                  'layer_wfs_id'):
+                  'layer_wfs_id',
+                  'layer_resource_id'):
 
             if a in data:
                 setattr(self, a, data[a])
@@ -113,7 +116,6 @@ PR_UPDATE = ResourceScope.update
 
 
 class _root_item_attr(SP):
-
     def getter(self, srlzr):
         return srlzr.obj.root_item.to_dict()
 

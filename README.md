@@ -2,6 +2,12 @@
 
 Catalog extension for NextGIS Web
 
+## Install instructions
+1. Create database tables:  
+`env/bin/nextgisweb --config config.ini initialize_db`
+2. Compile translations:
+`env/bin/nextgisweb-i18n --package nextgisweb_catalog compile`
+
 License
 -------
 This program is licensed under GNU GPL v2 or any later version
