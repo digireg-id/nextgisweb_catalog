@@ -45,6 +45,11 @@ def build_routes(config):
         factory=resource_factory, client=('id', 'layer_id')
     ).add_view(layer_display, context=Catalog, renderer='nextgisweb_catalog:template/layer.mako')
 
+    config.add_route(
+        'catalog.group', '/resource/{id:\d+}/group/{group_id:\d+}',
+        factory=resource_factory, client=('id', 'group_id')
+    ).add_view(group_display, context=Catalog, renderer='nextgisweb_catalog:template/group.mako')
+
 
 def catalog_display(obj, request):
     return dict(
@@ -105,3 +110,15 @@ def layer_display(catalog, request):
         custom_layout=True
     )
 
+
+def group_display(obj, request):
+    group_id = request.matchdict['group_id']
+    group_catalog_item = CatalogItem.query().filter(CatalogItem.id == group_id).one()
+
+    return dict(
+        title=obj.display_name,
+        catalog=obj,
+        group_catalog_item=group_catalog_item,
+        custom_layout=True,
+        ui_catalog_items=get_ui_catalog_items(group_catalog_item)
+    )

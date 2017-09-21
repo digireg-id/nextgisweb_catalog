@@ -1,7 +1,12 @@
 <div id="catalogGroups">
     %for group_info in ui_catalog_items['groups']:
         <div class="group-card">
-            <div class="group-title">${group_info['title']}</div>
+            <div class="group-title">
+                <a href="${request.route_url('catalog.group', id=catalog.id, group_id=group_info['id'])}"
+                   title="${group_info['title']}">
+                    ${group_info['title']}
+                </a>
+            </div>
             <div class="group-description">${group_info['description'] | n}</div>
             <div class="count_info">
                 <div class="count">${group_info['count']}</div>
