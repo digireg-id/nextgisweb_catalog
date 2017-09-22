@@ -31,33 +31,33 @@ define([
     'ngw-resource/ResourceBox',
     "dijit/form/TextBox",
     "dijit/form/CheckBox"
-], function (
-    declare,
-    array,
-    lang,
-    domStyle,
-    ContentPane,
-    _TemplatedMixin,
-    _WidgetsInTemplateMixin,
-    ItemFileWriteStore,
-    TreeStoreModel,
-    Tree,
-    dndSource,
-    registry,
-    serialize,
-    ResourcePicker,
-    i18n,
-    hbsI18n,
-    template
-) {
+], function (declare,
+             array,
+             lang,
+             domStyle,
+             ContentPane,
+             _TemplatedMixin,
+             _WidgetsInTemplateMixin,
+             ItemFileWriteStore,
+             TreeStoreModel,
+             Tree,
+             dndSource,
+             registry,
+             serialize,
+             ResourcePicker,
+             i18n,
+             hbsI18n,
+             template) {
     return declare([ContentPane, serialize.Mixin, _TemplatedMixin, _WidgetsInTemplateMixin], {
         title: i18n.gettext("Layers"),
         templateString: hbsI18n(template, i18n),
 
         constructor: function () {
-            this.itemStore = new ItemFileWriteStore({data: {
-                items: [{item_type: "root"}]
-            }});
+            this.itemStore = new ItemFileWriteStore({
+                data: {
+                    items: [{item_type: "root"}]
+                }
+            });
 
             this.itemModel = new TreeStoreModel({
                 store: this.itemStore,
@@ -69,8 +69,10 @@ define([
             this.widgetTree = new Tree({
                 model: this.itemModel,
                 showRoot: false,
-                getLabel: function (item) { return item.display_name; },
-                getIconClass: function(item, opened){
+                getLabel: function (item) {
+                    return item.display_name;
+                },
+                getIconClass: function (item, opened) {
                     return item.item_type == "group" ? (opened ? "dijitFolderOpened" : "dijitFolderClosed") : "dijitLeaf";
                 },
                 persist: false,
@@ -100,7 +102,7 @@ define([
                     {
                         display_name: i18n.gettext("Add group"),
                         description: "",
-                        item_type: "group",
+                        item_type: "group"
                     }, {
                         parent: widget.getAddParent(),
                         attribute: "children"
@@ -129,7 +131,7 @@ define([
             }));
 
             // Удаление слоя или группы
-            this.btnDeleteItem.on("click", function() {
+            this.btnDeleteItem.on("click", function () {
                 widget.itemStore.deleteItem(widget.widgetTree.selectedItem);
                 widget.treeLayoutContainer.removeChild(widget.itemPane);
                 widget.btnDeleteItem.set("disabled", true);
@@ -147,9 +149,16 @@ define([
                         widget.widgetItemDisplayNameLayer.set("value", widget.getItemValue("display_name"));
                         widget.widgetItemDescriptionLayer.set("value", widget.getItemValue("description"));
                         widget.wdgtItemLayerEnabled.set("checked", widget.getItemValue("layer_enabled"));
-                        widget.widgetWebMapLayer.set("value", widget.getItemValue("layer_webmap_id"));
-                        widget.widgetWMSLayer.set("value", widget.getItemValue("layer_wms_id"));
-                        widget.widgetWFSLayer.set("value", widget.getItemValue("layer_wfs_id"));
+
+                        var layer_webmap_id = widget.getItemValue("layer_webmap_id");
+                        widget.widgetWebMapLayer.set("value", layer_webmap_id ? {id: layer_webmap_id} : null);
+
+                        var layer_wms_id = widget.getItemValue("layer_wms_id");
+                        widget.widgetWMSLayer.set("value", layer_wms_id ? {id: layer_wms_id} : null);
+
+                        var layer_wfs_id = widget.getItemValue("layer_wfs_id");
+                        widget.widgetWFSLayer.set("value", layer_wfs_id ? {id: layer_wfs_id} : null);
+
                         widget.widgetProperties.selectChild(widget.paneLayer);
                     }
 
@@ -186,17 +195,19 @@ define([
                 widget.setItemValue("layer_enabled", newValue);
             });
 
-            this.widgetWebMapLayer.watch("value", function (attr, oldValue, newValue) {
-                debugger;
-                widget.setItemValue("layer_webmap_id", newValue);
+            this.widgetWebMapLayer.on("picked", function (event) {
+                var webmap = event.resource;
+                widget.setItemValue("layer_webmap_id", webmap.id);
             });
 
-            this.widgetWMSLayer.watch("value", function (attr, oldValue, newValue) {
-                widget.setItemValue("layer_wms_id", newValue);
+            this.widgetWMSLayer.on("picked", function (event) {
+                var wmsLayer = event.resource;
+                widget.setItemValue("layer_wms_id", wmsLayer.id);
             });
 
-            this.widgetWFSLayer.watch("value", function (attr, oldValue, newValue) {
-                widget.setItemValue("layer_wfs_id", newValue);
+            this.widgetWFSLayer.on("picked", function (event) {
+                var wfsLayer = event.resource;
+                widget.setItemValue("layer_wfs_id", wfsLayer.id);
             });
         },
 
@@ -225,7 +236,9 @@ define([
         },
 
         serializeInMixin: function (data) {
-            if (data.catalog === undefined) { data.catalog = {}; }
+            if (data.catalog === undefined) {
+                data.catalog = {};
+            }
             var store = this.itemStore;
 
             // Простого способа сделать дамп данных из itemStore
@@ -240,7 +253,9 @@ define([
                     layer_wfs_id: store.getValue(itm, "layer_wfs_id"),
                     layer_webmap_id: store.getValue(itm, "layer_webmap_id"),
                     layer_resource_id: store.getValue(itm, "layer_resource_id"),
-                    children: array.map(store.getValues(itm, "children"), function (i) { return traverse(i); })
+                    children: array.map(store.getValues(itm, "children"), function (i) {
+                        return traverse(i);
+                    })
                 };
             }
 
@@ -249,20 +264,27 @@ define([
 
         deserializeInMixin: function (data) {
             var value = data.catalog.root_item;
-            if (value === undefined) { return; }
+            if (value === undefined) {
+                return;
+            }
 
             var widget = this;
 
             function traverse(item, parent) {
-                array.forEach(item.children, function(i) {
+                array.forEach(item.children, function (i) {
                     var element = {};
                     for (var key in i) {
-                        if (key !== "children") { element[key] = i[key]; }
+                        if (key !== "children") {
+                            element[key] = i[key];
+                        }
                     }
                     var new_item = widget.itemStore.newItem(element, {parent: parent, attribute: "children"});
-                    if (i.children) { traverse(i, new_item); }
+                    if (i.children) {
+                        traverse(i, new_item);
+                    }
                 }, widget);
             }
+
             traverse(value, this.itemModel.root);
         }
     });
