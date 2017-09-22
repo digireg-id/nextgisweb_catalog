@@ -6,6 +6,15 @@ body {
     background-color: #fff;
 }
 
+.pre-load-widget {
+    display: none;
+}
+
+div.text-header-wrapper {
+    text-align: center;
+    margin: 20px 0 5px 0;
+}
+
 #title {
     background-color: #066ebe;
 }
@@ -125,6 +134,21 @@ div.content-wrapper.layers-rows {
     top: 0;
 }
 
+a.layer-action {
+    display: block;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+a.layer-action:hover {
+    background-color: #d9dcdc;
+}
+
+div.dijitTooltipDialogPopup div.dijitTooltipContainer,
+div.dijitTooltipDialogPopup div.dijitTooltipContents {
+    padding: 0;
+}
+
 #catalogLayers span.layer-title {
     font-size: 15px;
 }
@@ -139,6 +163,27 @@ div.content-wrapper.layers-rows {
 
 #layerContainer #title h1 {
     font-size: 21px;
+}
+
+span.dijitButton span.dijitInline.dijitButtonNode,
+span.dijitDropDownButton span.dijitInline.dijitButtonNode {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+span.dijitButton span.dijitIcon.icon,
+span.dijitDropDownButton span.dijitIcon.icon {
+    color: #7a7a7a;
+}
+
+span.dijitButton span.dijitIcon.icon:hover,
+span.dijitDropDownButton span.dijitIcon.icon:hover {
+    color: #066ebe;
+}
+
+span.dijitDropDownButton span.dijitInline.dijitArrowButtonInner {
+    display: none;
 }
 
 
