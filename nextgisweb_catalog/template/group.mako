@@ -46,7 +46,7 @@
                         <h2>${group_catalog_item.display_name}</h2>
                     </div>
 
-                    <span>${group_catalog_item.description}</span>
+                    <span>${group_catalog_item.description | n}</span>
                     <%include file="_layer_rows.mako"/>
                 </div>
             </div>
