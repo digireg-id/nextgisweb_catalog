@@ -5,6 +5,8 @@
 <%! import sys %>
 
 <%def name="head()">
+    <link href="${request.route_url('amd_package', subpath='ngw-catalog/catalog/vuetify.min.css')}"
+          rel="stylesheet" media="screen"/>
     <link href="${request.route_url('amd_package', subpath='ngw-catalog/catalog/catalog.css')}"
           rel="stylesheet" media="screen"/>
     <link href="${request.route_url('amd_package', subpath='ngw-catalog/catalog/layer.css')}"
@@ -41,21 +43,19 @@
 </%def>
 
 <div id="layerContainer">
-    <div id="mainBorderContainer" data-dojo-type="dijit/layout/BorderContainer" style="width: 100%; height: 100%">
-        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top', gutters: false">
-            <div id="title" class="title">
-                <a href="${request.route_url('catalog.display', id=catalog.id)}">
-                    <h1>${title}</h1>
-                </a>
-                <p><%include file="_navigation.mako"/></p>
-            </div>
+    <div id="mainBorderContainer" data-dojo-type="dijit/layout/BorderContainer" style="width: 100%; height: 100%" data-dojo-props="gutters:false">
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top', gutters: false" style="padding:0">
+            <header class="catalog-header">
+                <h1><a href="${request.route_url('catalog.display', id=catalog.id)}">${title}</a></h1>
+            </header>
         </div>
         <div data-dojo-type="dijit/layout/ContentPane"
              class="layer-info-panel"
              data-dojo-props="region:'leading', gutters: false, splitter:true"
              style="width: 30%;">
+            <p><%include file="_navigation.mako"/></p>
             <div class="pre-load-widget">
-                <h2>${catalog_item.display_name}</h2>
+                <h2 class="display-1">${catalog_item.display_name}</h2>
                 <div class="layer-type">
                     <span class="text-withIcon">
                         <span class="text-withIcon__icon">
@@ -69,7 +69,6 @@
                 </div>
                 <span class="layer-description">${catalog_item.description}</span>
                 <div class="layer-details">
-                    <h3>${tr(_("Layer details"))}</h3>
                     <%include file="nextgisweb:resource/template/section_summary.mako"/>
                 </div>
                 <div class="layer-actions pre-load-widget">

@@ -5,10 +5,14 @@
 <%! import sys %>
 
 <%def name="head()">
+    <link href="${request.route_url('amd_package', subpath='ngw-catalog/catalog/vuetify.min.css')}"
+          rel="stylesheet" media="screen"/>
     <link href="${request.route_url('amd_package', subpath='ngw-catalog/catalog/catalog.css')}"
           rel="stylesheet" media="screen"/>
     <link href="${request.route_url('amd_package', subpath='ngw-catalog/catalog/icons/css/fontello.css')}"
           rel="stylesheet" media="screen"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
 
     <script>
         require([
@@ -32,31 +36,22 @@
     </script>
 </%def>
 
-<div id="groupContainer" class="content pure-g">
-    <div class="content__inner pure-u-1 expand">
-        <div id="title" class="title">
-            <div class="content__container container">
-                <a href="${request.route_url('catalog.display', id=catalog.id)}">
-                    <h1>${title}</h1>
-                </a>
-            </div>
+<div id="groupContainer" class="catalog-inner">
+    <header class="catalog-header">
+        <h1><a href="${request.route_url('catalog.display', id=catalog.id)}">${title}</a></h1>
+    </header>
+    <div class="section content layers-rows">
+        <div class="container">
+            <h2 class="display-1">${catalog_item.display_name}</h2>
+            %if catalog_item.description:
+                <div>${catalog_item.description}</div>
+            %endif
+            <%include file="_layer_rows.mako"/>
         </div>
-        <div class="content-wrapper layers-rows">
-            <div class="pure-u-1 expand">
-                <div class="content__container container expand">
-                    <div class="text-header-wrapper">
-                        <h2>${catalog_item.display_name}</h2>
-                    </div>
-
-                    <span>${catalog_item.description | n}</span>
-                    <%include file="_layer_rows.mako"/>
-                </div>
-            </div>
-        </div>
-        %if catalog.root_item and catalog.root_item.children:
-
-        %else:
-            <p>${tr(_("Empty catalog!"))}</p>
-        %endif
     </div>
+    %if catalog.root_item and catalog.root_item.children:
+
+    %else:
+        <p>${tr(_("Empty catalog!"))}</p>
+    %endif
 </div>

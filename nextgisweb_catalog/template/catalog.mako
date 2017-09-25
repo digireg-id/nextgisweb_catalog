@@ -5,10 +5,16 @@
 <%! import sys %>
 
 <%def name="head()">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link href="${request.route_url('amd_package', subpath='ngw-catalog/catalog/vuetify.min.css')}"
+          rel="stylesheet" media="screen"/>
     <link href="${request.route_url('amd_package', subpath='ngw-catalog/catalog/catalog.css')}"
           rel="stylesheet" media="screen"/>
     <link href="${request.route_url('amd_package', subpath='ngw-catalog/catalog/icons/css/fontello.css')}"
           rel="stylesheet" media="screen"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
 
     <script>
         require([
@@ -32,41 +38,28 @@
     </script>
 </%def>
 
-<div class="content pure-g">
-    <div class="content__inner pure-u-1 expand">
-        <div id="title" class="title">
-            <div class="content__container container">
-                <a href="${request.route_url('catalog.display', id=catalog.id)}">
-                    <h1>${title}</h1>
-                </a>
-                %if catalog.description:
-                    <span class="catalog-description">${catalog.description | n}</span>
-                %endif
-            </div>
+<div class="catalog-main">
+    <header class="catalog-header catalog-header--main section">
+        <div class="container grid-list-xl">
+            <h1>${title}</h1>
+            %if catalog.description:
+                <div class="catalog-header__description">${catalog.description | n}</div>
+            %endif
         </div>
+    </header>
 
-        <div class="content-wrapper">
-            <div class="pure-u-1 expand">
-                <div class="content__container container expand">
-                        <%include file="_group_cards.mako"/>
-                </div>
-            </div>
+    <section class="catalog-groups section">
+        <%include file="_group_cards.mako"/>
+    </section>
+    <section class="catalog-layers catalog-recent section">
+        <div class="container grid-list-xl">
+            <h5 class="text-xs-center">${tr(_("New datasets"))}</h5>
+            <%include file="_layer_rows.mako"/>
         </div>
-        <div class="content-wrapper layers-rows">
-            <div class="pure-u-1 expand">
-                <div class="content__container container expand">
-                    <div class="text-header-wrapper">
-                        <h2>${tr(_("New datasets"))}</h2>
-                    </div>
+    </section>
+    %if catalog.root_item and catalog.root_item.children:
 
-                    <%include file="_layer_rows.mako"/>
-                </div>
-            </div>
-        </div>
-        %if catalog.root_item and catalog.root_item.children:
-
-        %else:
-            <p>${tr(_("Empty catalog!"))}</p>
-        %endif
-    </div>
+    %else:
+        <p>${tr(_("Empty catalog!"))}</p>
+    %endif
 </div>
