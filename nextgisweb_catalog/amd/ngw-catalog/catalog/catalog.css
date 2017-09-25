@@ -1,5 +1,5 @@
 body {
-    font-family: "PT Sans", Helvetica, Arial, sans-serif;
+    font-family: "Lato", "PT Sans", Helvetica, Arial, sans-serif;
     font-size: 17px;
     line-height: 1.529;
     color: rgba(0, 0, 0, 0.8);
@@ -23,7 +23,11 @@ div.text-header-wrapper {
     padding: 40px;
 }
 
-#title h1 {
+h1, h2, h3, h4, span.text-withIcon {
+    font-family: "Lato", "PT Sans", Helvetica, Arial, sans-serif;
+}
+
+h1 {
     font-size: 38px;
     font-family: "Lato", "PT Sans", Helvetica, Arial, sans-serif;
     color: white;
@@ -52,7 +56,7 @@ div.text-header-wrapper {
     border-radius: 6px 6px 6px 6px;
     -moz-border-radius: 6px 6px 6px 6px;
     -webkit-border-radius: 6px 6px 6px 6px;
-    border: 1px solid #f0f2f4;
+    border: 1px solid #D8D8D8;
 }
 
 #catalogGroups div.group-title {
@@ -157,6 +161,27 @@ div.dijitTooltipDialogPopup div.dijitTooltipContents {
     font-size: 13px;
 }
 
+div.layer-row span.dijitButton span.dijitInline.dijitButtonNode,
+div.layer-row span.dijitDropDownButton span.dijitInline.dijitButtonNode {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+div.layer-row span.dijitButton span.dijitIcon.icon,
+div.layer-row span.dijitDropDownButton span.dijitIcon.icon {
+    color: #9a9a9a;
+}
+
+div.layer-row span.dijitButton span.dijitIcon.icon:hover,
+div.layer-row span.dijitDropDownButton span.dijitIcon.icon:hover {
+    color: #066ebe;
+}
+
+div.layer-row span.dijitDropDownButton span.dijitInline.dijitArrowButtonInner {
+    display: none;
+}
+
 #layerContainer #title {
     padding: 22px;
 }
@@ -165,26 +190,50 @@ div.dijitTooltipDialogPopup div.dijitTooltipContents {
     font-size: 21px;
 }
 
-span.dijitButton span.dijitInline.dijitButtonNode,
-span.dijitDropDownButton span.dijitInline.dijitButtonNode {
+#layerContainer h2 {
+    padding-top: 12px;
+    margin-bottom: 8px;
+}
+
+#layerContainer div.layer-type {
+    font-size: 14px;
+}
+
+#layerContainer h3 {
+    margin: 15px 0 5px 0;
+}
+
+#layerContainer span.layer-description {
+    font-size: 13px;
+    line-height: 1 !important;
+}
+
+#layerContainer table.table-keyvalue {
+    font-size: 14px;
+}
+
+#layerContainer div.layer-info-panel {
+    background-color: #fafafa;
+    padding: 8px;
+}
+
+#layerContainer div.layer-details {
+    margin: 10px 0;
+}
+
+#layerContainer #mapContainer {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#layerContainer #mapContainer iframe {
     border: none;
-    background-color: transparent;
-    box-shadow: none;
+    width: 100%;
+    height: 100%;
 }
 
-span.dijitButton span.dijitIcon.icon,
-span.dijitDropDownButton span.dijitIcon.icon {
-    color: #7a7a7a;
+#layerContainer div.layer-actions {
+    margin-top: 20px;
 }
-
-span.dijitButton span.dijitIcon.icon:hover,
-span.dijitDropDownButton span.dijitIcon.icon:hover {
-    color: #066ebe;
-}
-
-span.dijitDropDownButton span.dijitInline.dijitArrowButtonInner {
-    display: none;
-}
-
-
-

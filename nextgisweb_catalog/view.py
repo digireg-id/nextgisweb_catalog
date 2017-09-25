@@ -91,7 +91,8 @@ def make_layer_info(layer_catalog_item):
         'id': layer_catalog_item.id,
         'title': layer_catalog_item.display_name,
         'description': layer_catalog_item.description,
-        'layer_resource_id': layer_catalog_item.layer_resource_id
+        'layer_resource_id': layer_catalog_item.layer_resource_id,
+        'layer_catalog_item': layer_catalog_item
     }
 
 
