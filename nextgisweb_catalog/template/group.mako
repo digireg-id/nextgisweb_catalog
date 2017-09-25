@@ -36,17 +36,19 @@
     <div class="content__inner pure-u-1 expand">
         <div id="title" class="title">
             <div class="content__container container">
-                <h1>${title}</h1>
+                <a href="${request.route_url('catalog.display', id=catalog.id)}">
+                    <h1>${title}</h1>
+                </a>
             </div>
         </div>
         <div class="content-wrapper layers-rows">
             <div class="pure-u-1 expand">
                 <div class="content__container container expand">
                     <div class="text-header-wrapper">
-                        <h2>${group_catalog_item.display_name}</h2>
+                        <h2>${catalog_item.display_name}</h2>
                     </div>
 
-                    <span>${group_catalog_item.description | n}</span>
+                    <span>${catalog_item.description | n}</span>
                     <%include file="_layer_rows.mako"/>
                 </div>
             </div>

@@ -55,6 +55,7 @@ def catalog_display(obj, request):
     return dict(
         title=obj.display_name,
         catalog=obj,
+        catalog_item=obj,
         custom_layout=True,
         ui_catalog_items=get_ui_catalog_items(obj.root_item)
     )
@@ -97,10 +98,10 @@ def make_layer_info(layer_catalog_item):
 
 
 def get_last_layers():
-    last_layers = CatalogItem.query()\
-        .filter(CatalogItem.item_type == 'layer')\
-        .order_by(CatalogItem.id.desc())\
-        .limit(5)\
+    last_layers = CatalogItem.query() \
+        .filter(CatalogItem.item_type == 'layer') \
+        .order_by(CatalogItem.id.desc()) \
+        .limit(5) \
         .all()
 
     return last_layers
@@ -119,14 +120,15 @@ def get_group_info(group_catalog_item):
 def layer_display(catalog, request):
     layer_id = request.matchdict['layer_id']
     layer_catalog_item = CatalogItem.query().filter(CatalogItem.id == layer_id).one()
+    nav_info = _get_nav_info(layer_catalog_item)
     resource_id = layer_catalog_item.layer_resource_id
     vector_layer = VectorLayer.query().filter(VectorLayer.id == resource_id).one()
 
     return dict(
         title=catalog.display_name,
         obj=vector_layer,
+        catalog_item=layer_catalog_item,
         catalog=catalog,
-        layer_catalog_item=layer_catalog_item,
         custom_layout=True
     )
 
@@ -146,7 +148,12 @@ def group_display(obj, request):
     return dict(
         title=obj.display_name,
         catalog=obj,
-        group_catalog_item=group_catalog_item,
+        catalog_item=group_catalog_item,
         custom_layout=True,
         ui_catalog_items=ui_catalog_items
     )
+
+
+def _get_nav_info(catalog_item):
+    if catalog_item:
+        pass

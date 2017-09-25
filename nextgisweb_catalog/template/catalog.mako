@@ -36,7 +36,9 @@
     <div class="content__inner pure-u-1 expand">
         <div id="title" class="title">
             <div class="content__container container">
-                <h1>${title}</h1>
+                <a href="${request.route_url('catalog.display', id=catalog.id)}">
+                    <h1>${title}</h1>
+                </a>
                 %if catalog.description:
                     <span class="catalog-description">${catalog.description | n}</span>
                 %endif

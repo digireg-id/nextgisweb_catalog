@@ -6,12 +6,16 @@ body {
     background-color: #fff;
 }
 
+#title a {
+    text-decoration: none;
+}
+
 .pre-load-widget {
     display: none;
 }
 
 div.text-header-wrapper {
-    text-align: center;
+    text-align: left;
     margin: 20px 0 5px 0;
 }
 
