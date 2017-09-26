@@ -44,7 +44,7 @@
         <div class="container">
             <h2 class="display-1">${catalog_item.display_name}</h2>
             %if catalog_item.description:
-                <div>${catalog_item.description}</div>
+                <div>${catalog_item.description | n}</div>
             %endif
             <%include file="_layer_rows.mako"/>
         </div>
