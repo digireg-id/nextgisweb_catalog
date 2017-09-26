@@ -79,11 +79,11 @@
                             <div data-dojo-type="dijit/TooltipDialog" class="layer-action">
                                 %if catalog_item.layer_wms_id:
                                     <a class="layer-action"
-                                       href="${request.route_url('resource.item', id=catalog_item.layer_wms_id)}">WMS</a>
+                                       href="${request.route_url('resource.show', id=catalog_item.layer_wms_id)}">WMS</a>
                                 %endif
                                 %if catalog_item.layer_wfs_id:
                                     <a class="layer-action"
-                                       href="${request.route_url('resource.item', id=catalog_item.layer_wfs_id)}">WFS</a>
+                                       href="${request.route_url('resource.show', id=catalog_item.layer_wfs_id)}">WFS</a>
                                 %endif
                             </div>
                         </div>
