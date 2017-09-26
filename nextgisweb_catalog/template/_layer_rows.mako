@@ -45,7 +45,6 @@
                         xlink:href="${request.static_url('nextgisweb:static/svg/svg-symbols.svg')}#vector_layer"></use>
                 </svg>
                 <div class="layer-card__title">${layer_info['title']}</div>
-                    <span class="layer-description">${layer_info['description'] | n}</span>
             </div>
 
             <a class="layer-card__link" href="${request.route_url('catalog.layer', layer_id=layer_info['id'], id=catalog.id)}"></a>
