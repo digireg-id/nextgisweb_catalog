@@ -137,13 +137,17 @@ div.dijitTooltipDialogPopup div.dijitTooltipContents {
     background-color: transparent;
     box-shadow: none;
     padding:0;
-
+    vertical-align: top;
+    height: 24px;
 }
 
 .button--icon .dijitButtonText,
-.clari .button--icon .dijitButtonText{
+.claro .button--icon .dijitButtonText{
     padding:0;
     color: #9a9a9a;
+    height: 24px;
+    line-height:24px;
+    vertical-align: top;
 }
 
 .button--icon:hover .dijitButtonText,
@@ -294,7 +298,7 @@ div.dijitTooltipDialogPopup div.dijitTooltipContents {
     border-radius: 4px;
     background-color: #f9f9f9;
     height: 180px;
-    padding-bottom: 64px;
+    padding-bottom: 54px;
 }
     .container.fill-height {
         align-items: flex-start;
@@ -311,6 +315,7 @@ div.dijitTooltipDialogPopup div.dijitTooltipContents {
 
     .group-card__description{
         font-size: 14px;
+        overflow: hidden;
     }
 
     .group-card__title:hover{
