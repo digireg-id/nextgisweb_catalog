@@ -53,7 +53,6 @@
              class="layer-info-panel"
              data-dojo-props="region:'leading', gutters: false, splitter:true"
              style="width: 30%;">
-            <p><%include file="_navigation.mako"/></p>
             <div class="pre-load-widget">
                 <h2 class="display-1">${catalog_item.display_name}</h2>
                 <div class="layer-type">
